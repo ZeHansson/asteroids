@@ -6,6 +6,7 @@ from shot import *
 
 
 class Player(CircleShape):
+    shoot_cd = 0
     
     def __init__(self, x, y ):
         super().__init__(x,y,PLAYER_RADIUS)
@@ -43,12 +44,16 @@ class Player(CircleShape):
         if keys[pygame.K_SPACE]:
             self.shoot()
             
+        self.shoot_cd -= dt
+            
     def move(self, dt):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
         self.position += forward * PLAYER_SPEED * dt
 
     def shoot(self):
-        shot = Shot(self.position.x, self.position.y, self.rotation )
+        if self.shoot_cd <= 0:
+            shot = Shot(self.position.x, self.position.y, self.rotation )
+            self.shoot_cd = PLAYER_SHOOT_COOLDOWN
 
 
 def main():

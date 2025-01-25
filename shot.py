@@ -9,7 +9,7 @@ class Shot(CircleShape):
         self.rotation = rotation 
     
     def draw(self, screen):
-        pygame.draw.circle(screen, "blue",self.position,self.radius, 2 )
+        pygame.draw.circle(screen, "red",self.position,self.radius, 2 )
 
     def move(self, dt):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
